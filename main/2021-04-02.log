@@ -1,0 +1,1 @@
+{"timestamp":"2021-04-02 16:21:36","level":"ERROR","loc":"node.go:269:node.(*node).onClientConnect","content":[{"Code":1001,"Text":""}]}
