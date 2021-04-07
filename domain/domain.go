@@ -102,6 +102,21 @@ func Register(username, password, confirmPassword, email, code string) (map[stri
 	if err != nil {
 		return nil, err
 	}
+	// Add system administrator as friend by default
+	err = model.FriendHandler.Insert(nil, &model.Friend{
+		Uid:       user.Id,
+		FriendUid: 1,
+	})
+	if err != nil {
+		return nil, err
+	}
+	err = model.FriendHandler.Insert(nil, &model.Friend{
+		Uid:       1,
+		FriendUid: user.Id,
+	})
+	if err != nil {
+		return nil, err
+	}
 	return map[string]interface{}{
 		"uid": user.Id,
 	}, nil
