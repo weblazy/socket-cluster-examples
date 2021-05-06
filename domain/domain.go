@@ -372,7 +372,7 @@ func AddFriend(uid, friendUid int64, remark string) (map[string]interface{}, err
 	if err != nil {
 		return nil, err
 	}
-	err = common.NodeInfo.SendToClientId(cast.ToString(friendUid), msgBytes)
+	err = common.BusinessClient.SendToClientId(cast.ToString(friendUid), msgBytes)
 	if err != nil {
 		return nil, err
 	}
@@ -446,7 +446,7 @@ func ManageAddFriend(uid, id, status int64) (map[string]interface{}, error) {
 			"sign":     sendUser.Username + "的个性签名",
 		},
 	})
-	err = common.NodeInfo.SendToClientId(cast.ToString(uid), msgBytes)
+	err = common.BusinessClient.SendToClientId(cast.ToString(uid), msgBytes)
 	if err != nil {
 		logx.Info(err)
 	}
@@ -464,7 +464,7 @@ func ManageAddFriend(uid, id, status int64) (map[string]interface{}, error) {
 			"sign":     receiveUser.Username + "的个性签名",
 		},
 	})
-	err = common.NodeInfo.SendToClientId(cast.ToString(systemMsg.SendUid), msgBytes)
+	err = common.BusinessClient.SendToClientId(cast.ToString(systemMsg.SendUid), msgBytes)
 	if err != nil {
 		logx.Info(err)
 	}
@@ -545,7 +545,7 @@ func JoinGroup(uid, groupId int64, remark string) (map[string]interface{}, error
 			"count": count,
 		},
 	})
-	err = common.NodeInfo.SendToClientId(cast.ToString(group.Uid), msgBytes)
+	err = common.BusinessClient.SendToClientId(cast.ToString(group.Uid), msgBytes)
 	if err != nil {
 		logx.Info(err)
 	}
@@ -598,7 +598,7 @@ func ManageJoinGroup(uid, id, status int64) (map[string]interface{}, error) {
 			"avatar":     group.Avatar,
 		},
 	})
-	err = common.NodeInfo.SendToClientId(cast.ToString(systemMsg.SendUid), msgBytes)
+	err = common.BusinessClient.SendToClientId(cast.ToString(systemMsg.SendUid), msgBytes)
 	if err != nil {
 		logx.Info(err)
 	}
@@ -633,7 +633,7 @@ func CreateGroup(uid int64, groupName, avatar string) (map[string]interface{}, e
 			"id":        group.Id,
 		},
 	})
-	err = common.NodeInfo.SendToClientId(cast.ToString(uid), msgBytes)
+	err = common.BusinessClient.SendToClientId(cast.ToString(uid), msgBytes)
 	if err != nil {
 		logx.Info(err)
 	}
@@ -705,7 +705,7 @@ func GetSystemMsg(uid int64, lastSystemMsgId int64, sort string) (map[string]int
 				"count":         0,
 			},
 		})
-		err = common.NodeInfo.SendToClientId(cast.ToString(uid), msgBytes)
+		err = common.BusinessClient.SendToClientId(cast.ToString(uid), msgBytes)
 		if err != nil {
 			logx.Info(err)
 		}

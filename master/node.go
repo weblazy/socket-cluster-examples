@@ -10,6 +10,7 @@ import (
 	"github.com/weblazy/socket-cluster-examples/auth"
 	"github.com/weblazy/socket-cluster-examples/common"
 	"github.com/weblazy/socket-cluster-examples/model"
+	"github.com/weblazy/socket-cluster/business_client"
 	"github.com/weblazy/socket-cluster/discovery/redis_discovery"
 	"github.com/weblazy/socket-cluster/node"
 	"github.com/weblazy/socket-cluster/protocol/ws_protocol"
@@ -46,6 +47,10 @@ func Node() {
 
 	discoveryHandler := redis_discovery.NewRedisDiscovery(&redis.Options{Addr: redisHost, Password: redisPassword, DB: 0})
 	common.NodeInfo, err = node.NewNode(node.NewNodeConf(*host, protocolHandler, sessionStorageHandler, discoveryHandler, onMsg).WithPort(*port))
+	if err != nil {
+		logx.Info(err)
+	}
+	common.BusinessClient, err = business_client.NewBusinessClient(business_client.NewBusinessClientConf([]string{*host}, discoveryHandler, sessionStorageHandler, onMsg))
 	if err != nil {
 		logx.Info(err)
 	}
