@@ -13,6 +13,6 @@ require (
 	github.com/weblazy/core v1.1.1
 	github.com/weblazy/crypto v1.0.1
 	github.com/weblazy/easy v1.1.2
-	github.com/weblazy/socket-cluster v0.0.0-20210506021926-c31e4ce6228b
+	github.com/weblazy/socket-cluster v0.0.0-20210823120443-a17533aebb70
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 )

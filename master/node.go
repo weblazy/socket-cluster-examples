@@ -41,10 +41,7 @@ func Node() {
 		panic(err)
 	}
 	protocolHandler := &ws_protocol.WsProtocol{}
-	sessionStorageHandler := redis_storage.NewRedisStorage([]*redis_storage.RedisNode{&redis_storage.RedisNode{
-		RedisConf: &redis.Options{Addr: redisHost, Password: redisPassword, DB: 0},
-		Position:  10000,
-	}})
+	sessionStorageHandler := redis_storage.NewRedisStorage(&redis.Options{Addr: redisHost, Password: redisPassword, DB: 0})
 
 	discoveryHandler := redis_discovery.NewRedisDiscovery(&redis.Options{Addr: redisHost, Password: redisPassword, DB: 0})
 	common.NodeInfo, err = node.NewNode(node.NewNodeConf(*host, protocolHandler, sessionStorageHandler, discoveryHandler, onMsg).WithPort(*port))
@@ -470,7 +467,7 @@ func onMsg(context *node.Context) {
 			return
 		}
 
-		err := common.NodeInfo.OnClientPing(cast.ToInt64(context.ClientId))
+		err := common.NodeInfo.OnClientPing(context.ClientId)
 		if err != nil {
 			logx.Info(err)
 			return
