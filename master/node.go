@@ -61,7 +61,6 @@ func getIndex(key string) int64 {
 }
 
 func onMsg(context *node.Context) {
-	logx.Info("msg:", string(context.Msg))
 	msgMap := make(map[string]interface{})
 	err := json.Unmarshal(context.Msg, &msgMap)
 	if err != nil {

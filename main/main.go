@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/labstack/echo/v4"
 	"github.com/weblazy/socket-cluster-examples/config"
@@ -24,7 +25,7 @@ func main() {
 	e := echo.New()
 	router.Router(e.Group("/p1/web", ws_protocol.OriginMiddlewareFunc))
 	go func() {
-		err := e.Start(fmt.Sprintf(":%d", 80))
+		err := e.Start(fmt.Sprintf(":%s", os.Getenv("SOCKET_CLUSTER_PORT")))
 		if err != nil {
 			panic(err)
 		}
